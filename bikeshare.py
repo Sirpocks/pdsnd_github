@@ -18,21 +18,21 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+
     city = ''
     while True:
         city = input('what is the city? ').lower()
         if city in CITY_DATA.keys():
             break
         print('please enter chicago, new york city, or washington')
-    # TO DO: get user input for month (all, january, february, ... , june)
+
     month = ''
     while True:
         month = input('please enter your month from january to june or "all" for all months: ').lower()
         if month in MONTHS:
             break
         print('please enter full name of the month')
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
+)
     day = ''
     while True:
         day = input('please enter day of week not a number ie. friday or "all" for all days: ').lower()
@@ -74,18 +74,16 @@ def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
-    start_time = time.time()
+    start_time = time.time())
 
-    # TO DO: display the most common month
     common_month = df['month'].mode()[0]
     month_name = MONTHS[int(common_month) - 1]
     print('the most common month is '+ month_name.title())
 
-    # TO DO: display the most common day of week
     common_day = df['day_of_week'].mode()[0]
     print('the most common day is '+ str(common_day))
     
-    # TO DO: display the most common start hour
+    
     df['hour'] = df['Start Time'].dt.hour
     common_hour = df['hour'].mode()[0]
     print('the most common hour is '+ str(common_hour))
@@ -99,16 +97,13 @@ def station_stats(df):
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
-
-    # TO DO: display most commonly used start station  
+ 
     common_start = df['Start Station'].mode()[0]
     print('the most commonly used start station is ' + str(common_start))
-    
-    # TO DO: display most commonly used end station
+    n
     common_end = df['End Station'].mode()[0]
     print('the most commonly used end station is ' + str(common_end))
 
-    # TO DO: display most frequent combination of start station and end station trip
     combo_station = (df['Start Station'] + " " + df['End Station']).mode()[0]
     print('the most frequent combination of stations is ' + str(combo_station))
     
@@ -123,11 +118,10 @@ def trip_duration_stats(df):
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
-    # TO DO: display total travel time
     total_travel_time = df['Trip Duration'].sum()
     print('the total travel time is ' + str(total_travel_time))
     
-    # TO DO: display mean travel time
+
     mean_travel_time = df['Trip Duration'].mean()
     print('the average time of travel is ' + str(mean_travel_time))
    
@@ -142,20 +136,17 @@ def user_stats(df):
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
-    # TO DO: Display counts of user types
     subscribers = df[df == 'Subscriber'].count()[6]
     customers = df[df == 'Customer'].count()[6]
     print('the number of subscribers is ' + str(subscribers))
     print('the number of customers is ' + str(customers))
    
-    # TO DO: Display counts of gender
     if 'Gender' in df:    
         males = df[df == 'Male'].count()[7]
         females = df[df == 'Female'].count()[7]
         print('\nthe number of males is ' + str(males))
         print('the number of females is ' + str(females))
     
-    # TO DO: Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df:
         oldest = df['Birth Year'].min()
         youngest = df['Birth Year'].max()
