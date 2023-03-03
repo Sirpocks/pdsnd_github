@@ -32,7 +32,7 @@ def get_filters():
         if month in MONTHS:
             break
         print('please enter full name of the month')
-)
+
     day = ''
     while True:
         day = input('please enter day of week not a number ie. friday or "all" for all days: ').lower()
@@ -169,6 +169,7 @@ def lines(df):
            x+=5
         else:
             break
+"""function outputs first 5 lines of raw data upon request yes or no. Every subsequent yes will display the next 5 lines until user enters n (no)"""
                
 def main():
     while True:
