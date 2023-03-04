@@ -85,14 +85,14 @@ def time_stats(df):
 
     common_month = df['month'].mode()[0]
     month_name = MONTHS[int(common_month) - 1]
-    print('the most common month is '+ month_name.title())
+    print('the most common month is {}'.format(month_name.title()))
 
     common_day = df['day_of_week'].mode()[0]
-    print('the most common day is '+ str(common_day))
+    print('the most common day is {}'.format(str(common_day)))
     
     df['hour'] = df['Start Time'].dt.hour
     common_hour = df['hour'].mode()[0]
-    print('the most common hour is '+ str(common_hour))
+    print('the most common hour is '.format(str(common_hour)))
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
    
@@ -104,13 +104,13 @@ def station_stats(df):
     start_time = time.time()
  
     common_start = df['Start Station'].mode()[0]
-    print('the most commonly used start station is ' + str(common_start))
+    print('the most commonly used start station is {}'.format(str(common_start)))
     
     common_end = df['End Station'].mode()[0]
-    print('the most commonly used end station is ' + str(common_end))
+    print('the most commonly used end station is {}'.format(str(common_end)))
 
     combo_station = (df['Start Station'] + " " + df['End Station']).mode()[0]
-    print('the most frequent combination of stations is ' + str(combo_station))
+    print('the most frequent combination of stations is {}'.format(str(combo_station)))
     
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -122,10 +122,10 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     total_travel_time = df['Trip Duration'].sum()
-    print('the total travel time is ' + str(total_travel_time))
+    print('the total travel time is {}'.format(str(total_travel_time)))
     
     mean_travel_time = df['Trip Duration'].mean()
-    print('the average time of travel is ' + str(mean_travel_time))
+    print('the average time of travel is {}'.format(str(mean_travel_time)))
    
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -139,22 +139,22 @@ def user_stats(df):
 
     subscribers = df[df == 'Subscriber'].count()[6]
     customers = df[df == 'Customer'].count()[6]
-    print('the number of subscribers is ' + str(subscribers))
-    print('the number of customers is ' + str(customers))
+    print('the number of subscribers is {}'.format(str(subscribers)))
+    print('the number of customers is {}'.format(str(customers)))
   
     if 'Gender' in df:    
         males = df[df == 'Male'].count()[7]
         females = df[df == 'Female'].count()[7]
-        print('\nthe number of males is ' + str(males))
-        print('the number of females is ' + str(females))
+        print('\nthere are {} males'.format(str(males)))
+        print('there are {} females '.format(str(females)))
     
     if 'Birth Year' in df:
         oldest = df['Birth Year'].min()
         youngest = df['Birth Year'].max()
         common_birth = df['Birth Year'].mode()[0]
-        print('\nthe earliest birth year is ' + str(int(oldest)))
-        print('the most recent birth year is ' + str(int(youngest)))
-        print('the most common birth year is ' + str(int(common_birth)))
+        print('\nthe earliest birth year is {}'.format(str(int(oldest))))
+        print('the most recent birth year is {}'.format(str(int(youngest))))
+        print('the most common birth year is {}'.format(str(int(common_birth))))
     
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -165,23 +165,23 @@ def lines(df):
     while True:
         display = input('would you like to see five lines of raw data? (y/n) ')
         if display == 'y':    
-           print(df.iloc[x:5+x])
+           print(df.iloc[x:5+x])  
            x+=5
-        else:
+        else: 
             break
                
 def main():
     while True:
-          city, month, day = get_filters()
-          df = load_data(city, month, day)
-          time_stats(df)
-          station_stats(df)
-          trip_duration_stats(df)
-          user_stats(df)
-          lines(df)
-            
-          restart = input('\nWould you like to restart? Enter yes or no.\n')
-          if restart.lower() != 'yes':
+        city, month, day = get_filters()
+        df = load_data(city, month, day)
+        time_stats(df)
+        station_stats(df)
+        trip_duration_stats(df)
+        user_stats(df)
+        lines(df)
+
+        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        if restart.lower() != 'yes':
             break
 
 
