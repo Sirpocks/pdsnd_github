@@ -7,6 +7,31 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
 DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all']
+
+def get_city():
+    while True:
+        city = input('what is the city? ').lower()
+        if city in CITY_DATA.keys():
+            break
+        print('please enter chicago, new york city, or washington')
+    return city
+
+def get_month():
+    while True:
+        month = input('please enter your month from january to june or "all" for all months: ').lower()
+        if month in MONTHS:
+            break
+    return month
+            
+def get_day():
+    while True:
+        day = input('please enter day of week not a number ie. friday or "all" for all days: ').lower()
+        if day in DAYS:
+            break
+        print('please enter a valid day of week')
+    print('-'*40)
+    return day
+
 def get_filters(): 
     """
     Asks user to specify a city, month, and day to analyze.
@@ -15,30 +40,14 @@ def get_filters():
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
+   
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-
-    city = ''
-    while True:
-        city = input('what is the city? ').lower()
-        if city in CITY_DATA.keys():
-            break
-        print('please enter chicago, new york city, or washington')
-
-    month = ''
-    while True:
-        month = input('please enter your month from january to june or "all" for all months: ').lower()
-        if month in MONTHS:
-            break
-        print('please enter full name of the month')
-
-    day = ''
-    while True:
-        day = input('please enter day of week not a number ie. friday or "all" for all days: ').lower()
-        if day in DAYS:
-            break
-        print('please enter a valid day of week')
-    print('-'*40)
+    
+    city = get_city()
+    month = get_month()
+    day = get_day()
+    
     return city, month, day
 
 def load_data(city, month, day):
@@ -72,7 +81,7 @@ def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
-    start_time = time.time())
+    start_time = time.time()
 
     common_month = df['month'].mode()[0]
     month_name = MONTHS[int(common_month) - 1]
@@ -81,13 +90,12 @@ def time_stats(df):
     common_day = df['day_of_week'].mode()[0]
     print('the most common day is '+ str(common_day))
     
-    
     df['hour'] = df['Start Time'].dt.hour
     common_hour = df['hour'].mode()[0]
     print('the most common hour is '+ str(common_hour))
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+   
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
@@ -97,7 +105,7 @@ def station_stats(df):
  
     common_start = df['Start Station'].mode()[0]
     print('the most commonly used start station is ' + str(common_start))
-    n
+    
     common_end = df['End Station'].mode()[0]
     print('the most commonly used end station is ' + str(common_end))
 
@@ -106,7 +114,6 @@ def station_stats(df):
     
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
@@ -117,7 +124,6 @@ def trip_duration_stats(df):
     total_travel_time = df['Trip Duration'].sum()
     print('the total travel time is ' + str(total_travel_time))
     
-
     mean_travel_time = df['Trip Duration'].mean()
     print('the average time of travel is ' + str(mean_travel_time))
    
@@ -135,7 +141,7 @@ def user_stats(df):
     customers = df[df == 'Customer'].count()[6]
     print('the number of subscribers is ' + str(subscribers))
     print('the number of customers is ' + str(customers))
-   
+  
     if 'Gender' in df:    
         males = df[df == 'Male'].count()[7]
         females = df[df == 'Female'].count()[7]
@@ -163,7 +169,6 @@ def lines(df):
            x+=5
         else:
             break
-"""function outputs first 5 lines of raw data upon request yes or no. Every subsequent yes will display the next 5 lines until user enters n (no)"""
                
 def main():
     while True:
@@ -174,6 +179,7 @@ def main():
           trip_duration_stats(df)
           user_stats(df)
           lines(df)
+            
           restart = input('\nWould you like to restart? Enter yes or no.\n')
           if restart.lower() != 'yes':
             break
