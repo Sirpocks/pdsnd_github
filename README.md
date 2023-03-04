@@ -16,5 +16,5 @@ Bikeshare.py
 ### Credits
 https://learn.udacity.com/nanodegrees/nd104/parts/cd0024/lessons/ls0517/concepts/9d330642-c039-4e4e-8a48-4beffa333af6
 https://guides.lib.berkeley.edu/how-to-write-good-documentation
-
+https://pybit.es/articles/refactoring/
 
